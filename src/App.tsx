@@ -1,11 +1,27 @@
 import './App.css'
 import {stays} from "../src/data/stays"
 import { Stay } from './data/stays'
+import Modal from "../src/components/modal"
 
+import {useState, createContext} from 'react'
+
+
+export type add = "location" | "guests" | ""
 
 function App() {
+  const locationContext = createContext()
+  const [location, setLocation] = useState("")
   
 
+
+  const [open , setOpen] = useState<boolean>(false)
+  const [select, setSelect] = useState<add>("")
+
+  const handleOpen = (add: add): void => {
+    setSelect(add)
+setOpen(true)
+  }
+  
   return (
     <>
     <div className='max-w-screen-xl mx-auto flex flex-col justify-center font-serif'>
@@ -16,8 +32,12 @@ function App() {
           className='w-32' />
         </div>
       <div id='search' className='flex flex-row '>
-<span className="cursor-pointer transition-all duration-300 rounded-l-xl px-8 py-4 text-slate-400 drop-shadow-xl bg-white hover:bg-slate-200">add location</span>
-<span className="cursor-pointer transition-all duration-300  px-8 py-4 text-slate-400 drop-shadow-xl bg-white hover:bg-slate-200">add guests</span>
+
+<button className="cursor-pointer transition-all duration-300 rounded-l-xl px-8 py-4 text-slate-400 drop-shadow-xl bg-white hover:bg-slate-200" onClick={() => handleOpen("location")}>add location</button>
+<button 
+onClick={() => handleOpen("guests")}
+className="cursor-pointer transition-all duration-300  px-8 py-4 text-slate-400 drop-shadow-xl bg-white hover:bg-slate-200">add guests</button>
+
 <div className='cursor-pointer transition-all duration-300 rounded-r-xl px-8 py-4 drop-shadow-xl bg-white hover:bg-slate-200'>
 🔍
 </div>
@@ -30,7 +50,9 @@ function App() {
             <img src={stay.photo} className='rounded-xl  object-cover h-64 w-80'/>
             <div id='texts' className='text-xl mt-4'>
               <div id='text-row1' className='flex flex-row items-center justify-between'>
-                <div className='border-black border-2 rounded-xl p-1 m-1'>super host</div>
+                {stay.superHost ? 
+                <div className='border-black border-2 rounded-xl p-1 m-1'>super host</div> : ""
+              }
                 <div>{stay.type}</div>
                 <div>⭐{stay.rating}</div>
               </div>
@@ -42,6 +64,8 @@ function App() {
       </div>
 
     </div>
+    
+    <Modal  open={open} setOpen={setOpen} select={select}/>
     </>
   )
 }
