@@ -2,15 +2,13 @@ import './App.css'
 import {stays} from "../src/data/stays"
 import { Stay } from './data/stays'
 import Modal from "../src/components/modal"
+import React, { useState } from 'react'
 
-import {useState, createContext} from 'react'
 
 
 export type add = "location" | "guests" | ""
 
 function App() {
-  const locationContext = createContext()
-  const [location, setLocation] = useState("")
   
 
 
@@ -24,6 +22,7 @@ setOpen(true)
   
   return (
     <>
+
     <div className='max-w-screen-xl mx-auto flex flex-col justify-center font-serif'>
 
       <div id='header' className='flex sm:flex-row flex-col justify-between p-4 items-center'>
@@ -66,6 +65,7 @@ className="cursor-pointer transition-all duration-300  px-8 py-4 text-slate-400 
     </div>
     
     <Modal  open={open} setOpen={setOpen} select={select}/>
+
     </>
   )
 }
