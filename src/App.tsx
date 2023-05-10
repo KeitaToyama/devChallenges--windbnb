@@ -2,7 +2,7 @@ import './App.css'
 import {stays} from "../src/data/stays"
 import { Stay } from './data/stays'
 import Modal from "../src/components/modal"
-import React, { useState } from 'react'
+import  { useState } from 'react'
 
 
 
@@ -10,7 +10,8 @@ export type add = "location" | "guests" | ""
 
 function App() {
   
-
+const [location, setLocation] = useState<string | null>("")
+const [guests, setGuests] = useState<number | null> (1)
 
   const [open , setOpen] = useState<boolean>(false)
   const [select, setSelect] = useState<add>("")
@@ -64,7 +65,10 @@ className="cursor-pointer transition-all duration-300  px-8 py-4 text-slate-400 
 
     </div>
     
-    <Modal  open={open} setOpen={setOpen} select={select}/>
+    <Modal  open={open} setOpen={setOpen} select={select}
+    location={location} setLocation={setLocation}
+    guests={guests} setGuests={setGuests}
+    />
 
     </>
   )
