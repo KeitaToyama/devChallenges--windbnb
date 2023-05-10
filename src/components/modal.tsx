@@ -5,6 +5,13 @@ import { Stay } from '../data/stays'
 
 const Modal = (props: any) => {
   
+const setLocation = (button:string):void => {
+  props.setLocation(button)
+}
+
+const setGuests = (button:number):void => {
+  props.setGuests(button)
+}
 
   const closeModal = ():void => {
     props.setOpen(false)
@@ -16,7 +23,7 @@ const Modal = (props: any) => {
   return (
     <>
      {props.open ? (
-      <> // showFlagがtrueだったらModalを表示する
+      <> 
         <div id="overlay" 
         className=' fixed top-0 left-0 w-full h-full bg-slate-400 opacity-60 flex flex-row items-center justify-center z-20'
         onClick={() => closeModal()}
@@ -34,18 +41,30 @@ const Modal = (props: any) => {
             <div id='searches' className='grid grid-cols-3 items-center py-4 '>
 <div className='cursor-pointer transition-all duration-300 rounded-xl px-8 py-4  drop-shadow-xl bg-white hover:bg-slate-200 flex flex-col'>
   <div>LOCATION</div>
-  <div className='text-slate-400'>add location</div>
+  <div >
+    {props.location ? (
+<span>{props.location}</span>
+    ):(
+      <span className='text-slate-400'>add location</span>
+    )}
+    </div>
 </div>
 <div className='cursor-pointer transition-all duration-300  px-8 py-4 rounded-xl drop-shadow-xl bg-white hover:bg-slate-200 flex flex-col'>
   <div>GUESTS</div>
-  <div>0</div>
+  {props.guests ? (
+<span>{props.guests}</span>
+    ):(
+      <span className='text-slate-400'>1</span>
+    )}
 </div>
 <div className='flex  justify-center cursor-pointer transition-all duration-300 drop-shadow-xl hover:bg-red-700 rounded-xl px-8 py-4 bg-red-500 text-white'>🔍search</div>
             </div>
             
             <div id='selecta' className='grid grid-cols-3 items-center py-4'>
               <div >
-                {places.map(place => <p>{place}</p>)}
+                {places.map(place => 
+                <p onClick={() => setLocation(place)}>{place}</p>
+                )}
               </div>
               <div className='flex flex-col'>
                 <div>adult</div>

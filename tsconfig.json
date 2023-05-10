@@ -6,9 +6,9 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    // "moduleResolution": "nodenext",
-    // "allowImportingTsExtensions": false,
-    // "resolveJsonModule": false,
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": false,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
