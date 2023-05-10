@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { add } from '../App';
 import {stays} from "../data/stays"
 import { Stay } from '../data/stays'
 
 const Modal = (props: any) => {
+  
+
   const closeModal = ():void => {
     props.setOpen(false)
   }
+  const places= Array.from(new Set(stays.map(stay => stay.city)))
+
+  
+
   return (
     <>
      {props.open ? (
@@ -25,7 +31,7 @@ const Modal = (props: any) => {
               <button onClick={() => closeModal()}>&times;</button>
             </div>
 
-            <div id='searches' className='grid grid-cols-3 items-center py-4'>
+            <div id='searches' className='grid grid-cols-3 items-center py-4 '>
 <div className='cursor-pointer transition-all duration-300 rounded-xl px-8 py-4  drop-shadow-xl bg-white hover:bg-slate-200 flex flex-col'>
   <div>LOCATION</div>
   <div className='text-slate-400'>add location</div>
@@ -38,12 +44,14 @@ const Modal = (props: any) => {
             </div>
             
             <div id='selecta' className='grid grid-cols-3 items-center py-4'>
-              <div className='flex flex-col'>
-                {stays.map((stay: Stay, index: number) => (
-                  <div>{stay.city}</div>
-                ))}
+              <div >
+                {places.map(place => <p>{place}</p>)}
               </div>
-              <div>1</div>
+              <div className='flex flex-col'>
+                <div>adult</div>
+                <div>child</div>
+              </div>
+              
               <div>{props.select}</div>
             </div>
 
@@ -57,3 +65,5 @@ const Modal = (props: any) => {
 };
 
 export default Modal;
+
+
